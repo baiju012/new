@@ -132,11 +132,11 @@ def signup():
                         "subject": "Student Account Details"
                     }
                 ],
-                "from": {"email": "shivam@thesmartbridge.com"},
+                "from": {"email": "216301031@gkv.ac.in"},
                 "content": [
                     {
                         "type": "text/plain",
-                        "value": "Dear {} ,  \n Welcome to Smartbridge University, Here there the details to Login Into your student portal link : {} \n YOUR Username : {} \n  PASSWORD : {}  \n Thank you \n Sincerely\n Office of  Admissions\n Smartbridhe University \n E-Mail: admission@smartbridgeuniversity.ac.in ; Website: www.smartinternz.com" .format( name,link, username, password)
+                        "value": "Dear {} ,  \n Welcome to FET, Here there the details to Login Into your student portal link : {} \n YOUR Username : {} \n  PASSWORD : {}  \n Thank you \n Sincerely\n Office of  Admissions\n GKV University \n E-Mail: admission@GKVuniversity.ac.in ; Website: www.gkv.ac.in" .format( name,link, username, password)
                     }
                 ]
             }
