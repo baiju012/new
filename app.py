@@ -10,8 +10,8 @@ import datetime
 import requests
 
 app = Flask(__name__)
-app.secret_key = 'a'
-conn = ibm_db.connect("DATABASE=bludb; HOSTNAME=9938aec0-8105-433e-8bf9-0fbb7e483086.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud; PORT=32459; UID=jnm26860;PASSWORD=LY1UYed8pKUdqDTE; SECURITY=SSL;SSLServerCertificate = DigiCertGlobalRootCA.crt", "", "")
+app.secret_key = 'aBCE'
+conn = ibm_db.connect("DATABASE=bludb; HOSTNAME=19af6446-6171-4641-8aba-9dcff8e1b6ff.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud; PORT=30699; UID=bns29209;PASSWORD=fv6rxjIt3Yj4jMAq; SECURITY=SSL;SSLServerCertificate = DigiCertGlobalRootCA.crt", "", "")
 url = "https://rapidprod-sendgrid-v1.p.rapidapi.com/mail/send"
 @app.route("/")
 def index():
@@ -71,7 +71,7 @@ def loginentered():
             Username = account['USERNAME']
             Name = account['NAME']
             msg = "logged in successfully !"
-            sql = "SELECT ROLE FROM register where email = ?"
+            sql = "SELECT ROLE FROM REGISTER where email = ?"
             stmt = ibm_db.prepare(conn, sql)
             ibm_db.bind_param(stmt, 1, email)
             ibm_db.execute(stmt)
@@ -102,7 +102,7 @@ def signup():
         username = request.form["susername"]
         role =int(request.form['role'])
         password = ''.join(random.choice(string.ascii_letters) for i in range(0,8))
-        link = 'https://mahidharuniversity.ac.in/portal'
+        link = 'https://www.gkv.ac.in/'
         print(password)
         sql = "SELECT* FROM register WHERE email= ?"
         stmt = ibm_db.prepare(conn, sql)
@@ -136,7 +136,7 @@ def signup():
                 "content": [
                     {
                         "type": "text/plain",
-                        "value": "Dear {} ,  \n Welcome to FET, Here there the details to Login Into your student portal link : {} \n YOUR Username : {} \n  PASSWORD : {}  \n Thank you \n Sincerely\n Office of  Admissions\n GKV University \n E-Mail: admission@GKVuniversity.ac.in ; Website: www.gkv.ac.in" .format( name,link, username, password)
+                        "value": "Dear {} ,  \n Welcome to Grukul kangri university, Here there the details to Login Into your student portal link : {} \n YOUR Username : {} \n  PASSWORD : {}  \n Thank you \n Sincerely\n Office of  Admissions\n Grukul kangri university \n E-Mail: admission@GKV.ac.in ; Website: www.gkv.ac.inm" .format( name,link, username, password)
                     }
                 ]
             }
@@ -192,14 +192,14 @@ def sassignment():
             # connecting with cloud object storage
             
             COS_ENDPOINT = "https://s3.jp-tok.cloud-object-storage.appdomain.cloud"
-            COS_API_KEY_ID = "WFnJK-QhdWweXgTI3CvPG5KkakqxfHK_0u3Ah-tYFbQw"
-            COS_INSTANCE_CRN = "crn:v1:bluemix:public:cloud-object-storage:global:a/0b9ce0b8745b41bea942e03e0b2d2eb4:43b5bcfe-447e-42cb-99d2-292289fffdc1::"
+            COS_API_KEY_ID = "0o3wJG80Ut7aCDdf9Lpeg7le1Gzu9yB9OV4IoiYv1YtP"
+            COS_INSTANCE_CRN = "crn:v1:bluemix:public:cloud-object-storage:global:a/55e1ba00b7b34acba471d32a0bcdb0ef:83486546-828a-4c66-92be-6d4694d9213f::"
     
             
             
             
             cos = ibm_boto3.resource("s3",ibm_api_key_id=COS_API_KEY_ID,ibm_service_instance_id=COS_INSTANCE_CRN, config=Config(signature_version="oauth"),endpoint_url=COS_ENDPOINT)
-            cos.meta.client.upload_file(Filename= filepath,Bucket='baiju012',Key= u+x+".pdf")
+            cos.meta.client.upload_file(Filename= filepath, Bucket='sbcadfdpibm',Key= u+x+".pdf")
             msg = "Uploding Successful"
             ts = datetime.datetime.now()
             t = ts.strftime("%Y-%m-%d %H:%M:%S")
@@ -258,14 +258,14 @@ def marksassign(stdname):
     da  = []
 
     COS_ENDPOINT = "https://s3.jp-tok.cloud-object-storage.appdomain.cloud"
-    COS_API_KEY_ID = "WFnJK-QhdWweXgTI3CvPG5KkakqxfHK_0u3Ah-tYFbQw"
-    COS_INSTANCE_CRN = "crn:v1:bluemix:public:cloud-object-storage:global:a/0b9ce0b8745b41bea942e03e0b2d2eb4:43b5bcfe-447e-42cb-99d2-292289fffdc1::"
+    COS_API_KEY_ID = "0o3wJG80Ut7aCDdf9Lpeg7le1Gzu9yB9OV4IoiYv1YtP"
+    COS_INSTANCE_CRN = "crn:v1:bluemix:public:cloud-object-storage:global:a/55e1ba00b7b34acba471d32a0bcdb0ef:83486546-828a-4c66-92be-6d4694d9213f::"
     cos = ibm_boto3.client("s3",
                         ibm_api_key_id=COS_API_KEY_ID,
                         ibm_service_instance_id=COS_INSTANCE_CRN,
                         config=Config(signature_version="oauth"),
                         endpoint_url=COS_ENDPOINT)
-    output = cos.list_objects(Bucket="baiju012")
+    output = cos.list_objects(Bucket="sbcadfdpibm")
     output
     l=[]
     for i in range(0,len(output['Contents'])):
@@ -328,6 +328,7 @@ def marksupdate(anum):
     print(ma)
     print(da)
     return render_template("facultymarks.html", msg =msg, marks = ma, g=g, file=file, datetime=da)
+
 
 
 
